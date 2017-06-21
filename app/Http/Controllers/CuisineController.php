@@ -10,6 +10,6 @@ class CuisineController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['cook']);
-        
+
     }
 }

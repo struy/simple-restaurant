@@ -14,11 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Сторінки авторизації, реєстрації, скидання пароля.
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Сторінка керування користувачами з фільтром по емейлу, імені та сортуванням
+
+//Сторінка офіціанта з списком замовлень та їх статусами
+//Сторінка офіціанта з створенням нового замовлення
+Route::resource('orders', 'OrderController');
+
+//Сторінка кухні з усіма активними замовленнями (готуються/готові)
+Route::get('/cuisine', 'CuisineController@index')->name('cuisine');
+
