@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('users_id')->unsigned();
+            $table->integer('dishes_id')->unsigned();
             $table->foreign('users_id')->references('id')->on('users');
             $table->foreign('dishes_id')->references('id')->on('dishes');
             $table->boolean('confirmed');
