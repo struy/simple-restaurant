@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
         $cook->name = 'Cook Name';
         $cook->email = 'cook@example.com';
         $cook->password = bcrypt('secret');
+        $cook->verified = 1;
         $cook->save();
         $cook->roles()->attach($role_cook);
 
@@ -21,6 +22,7 @@ class UserTableSeeder extends Seeder
         $waiter->name = 'Waiter Name';
         $waiter->email = 'waiter@example.com';
         $waiter->password = bcrypt('secret');
+        $waiter->verified = 1;
         $waiter->save();
         $waiter->roles()->attach($role_waiter);
     }
