@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('dishes_id')->unsigned();
             $table->foreign('users_id')->references('id')->on('users');
             $table->foreign('dishes_id')->references('id')->on('dishes');
-            $table->boolean('confirmed');
+            $table->boolean('confirmed')->default(0);
             $table->unsignedTinyInteger('quantity');
             $table->timestamps();
         });
