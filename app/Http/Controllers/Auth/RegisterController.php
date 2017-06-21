@@ -1,11 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use App\Jobs\SendVerificationEmail;
+
 
 class RegisterController extends Controller
 {
@@ -42,7 +48,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -57,7 +63,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
@@ -66,6 +72,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'email_token' => bcrypt($data['email'])
         ]);
         $user
             ->roles()
@@ -74,4 +81,24 @@ class RegisterController extends Controller
         return $user;
 
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        dispatch(new SendVerificationEmail($user));
+        return view('verification');
+    }
+
+
+    public function verify($token)
+    {
+        $user = User::where('email_token', $token)->first();
+        $user->verified = 1;
+        if ($user->save()) {
+            return view('emailconfirm', ['user' => $user]);
+        }
+    }
+
+
 }

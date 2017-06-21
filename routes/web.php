@@ -18,6 +18,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Сторінки авторизації, реєстрації, скидання пароля.
 Auth::routes();
+//Реєстрація з підтвердженням пароля по емейлу.
+Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
 //Сторінка керування користувачами з фільтром по емейлу, імені та сортуванням
 
