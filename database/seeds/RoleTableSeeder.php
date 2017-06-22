@@ -28,6 +28,11 @@ class RoleTableSeeder extends Seeder
         $role_waiter->description = 'A New User';
         $role_waiter->save();
 
+        $role_waiter = new Role();
+        $role_waiter->name = 'admin';
+        $role_waiter->description = 'A New Admin';
+        $role_waiter->save();
+
     }
 }
 

@@ -9,6 +9,8 @@ class UserTableSeeder extends Seeder
     {
         $role_cook = Role::where('name', 'cook')->first();
         $role_waiter = Role::where('name', 'waiter')->first();
+        $role_admin = Role::where('name', 'admin')->first();
+
 
         $cook = new User();
         $cook->name = 'Cook Name';
@@ -25,5 +27,17 @@ class UserTableSeeder extends Seeder
         $waiter->verified = 1;
         $waiter->save();
         $waiter->roles()->attach($role_waiter);
+
+
+        $admin = new User();
+        $admin->name = 'Admin Name';
+        $admin->email = 'admin@example.com';
+        $admin->password = bcrypt('secret');
+        $admin->verified = 1;
+        $admin->save();
+        $admin->roles()->attach($role_admin);
+
+
+
     }
 }
