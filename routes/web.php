@@ -24,7 +24,6 @@ Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 //Сторінка керування користувачами з фільтром по емейлу, імені та сортуванням
 Route::resource('users', 'UserController');
 
-
 //Сторінка офіціанта з списком замовлень та їх статусами
 //Сторінка офіціанта з створенням нового замовлення
 Route::resource('orders', 'OrderController');
