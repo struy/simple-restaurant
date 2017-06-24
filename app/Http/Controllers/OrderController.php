@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dishe;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -23,7 +24,17 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles(['waiters']);
+//        $request->user()->authorizeRoles(['waiters','admin']);
+
+        $items = Dishe::all();
+
+        $data = [
+             'items' => $items,
+        ];
+        return view('order/create', $data);
+
+
+
     }
 
     /**
@@ -34,7 +45,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,	[
+            'dishes_id'	=>	'required|min:1',
+            'quantity'	=>	'required|min:1|max:100'
+        ]);
+
+        return $request->all();
     }
 
     /**
