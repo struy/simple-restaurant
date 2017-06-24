@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Order extends Model
 {
@@ -18,10 +19,13 @@ class Order extends Model
 
     public function getTimeAttribute()
     {
-        $cooking_time = $this->dishe->cooking_time;
-        $result = $cooking_time * $this->quantity;
+        $dt = $this->created_at;
+        $carbon = Carbon::instance($dt);
+        $cooking_time = ($this->dishe->cooking_time) * ($this->quantity);
+        $carbon->addMinutes($cooking_time);;
 
-        return $result;
+
+        return $carbon->toDateTimeString();;
 
     }
 

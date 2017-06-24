@@ -12,7 +12,7 @@
                     <th class="text-center">Quantity</th>
                     <th class="text-center">Confirmed</th>
                     <th class="text-center">Number of table</th>
-                    <th class="text-center">Date Created</th>
+                    <th class="text-center">Timer</th>
 
                 </tr>
                 </thead>
@@ -29,7 +29,7 @@
                             @endif
                         </td>
                         <td>{{$order->number_table}}</td>
-                        <td>{{$order->created_at}}</td>
+                        <td>{{$order->time}}</td>
 
 
                     </tr>
