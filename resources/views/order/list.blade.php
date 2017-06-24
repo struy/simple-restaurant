@@ -29,7 +29,8 @@
                             @endif
                         </td>
                         <td>{{$order->number_table}}</td>
-                        <td>{{$order->time}}</td>
+                        <td> <div data-countdown="{{$order->time}}"></div>
+                            </td>
 
 
                     </tr>
@@ -43,5 +44,5 @@
 @endsection
 
 @section('scripts')
-    @include('scripts.user')
+    @include('scripts.order')
 @endsection
