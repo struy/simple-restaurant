@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Dishe;
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -29,10 +31,9 @@ class OrderController extends Controller
         $items = Dishe::all();
 
         $data = [
-             'items' => $items,
+            'items' => $items,
         ];
         return view('order/create', $data);
-
 
 
     }
@@ -45,12 +46,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,	[
-            'dishes_id'	=>	'required|min:1',
-            'quantity'	=>	'required|min:1|max:100'
+        $this->validate($request, [
+            'dishes_id' => 'required|min:1',
+            'quantity' => 'required|min:1|max:100'
         ]);
-
-        return $request->all();
+        $order = new Order();
+        $order->dishes_id = $request->dishes_id;
+        $order->users_id = Auth::id();
+        $order->quantity = $request->quantity;
+        $order->save();
+        $request->session()->flash('success', 'The order was successfully saved!');
+        return back();
     }
 
     /**
