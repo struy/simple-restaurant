@@ -14,4 +14,10 @@ class Order extends Model
     {
         return $this->belongsTo('App\Dishe', 'dishes_id');
     }
+
+    public function getTimeAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
 }

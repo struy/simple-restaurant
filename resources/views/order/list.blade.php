@@ -9,8 +9,7 @@
                 <tr>
                     <th class="text-center">#</th>
                     <th class="text-center">Name of dishes</th>
-
-
+                    <th class="text-center">Quantity</th>
                     <th class="text-center">Confirmed</th>
                     <th class="text-center">Number of table</th>
                     <th class="text-center">Date Created</th>
@@ -21,6 +20,7 @@
                     <tr class="item{{$order->id}}">
                         <td>{{$order->id}}</td>
                         <td>{{$order->dishe->name}}</td>
+                        <td>{{$order->quantity}}</td>
                         <td>
                             @if ($order->Confirmed)
                                 <span style="color:green">YES</span>
