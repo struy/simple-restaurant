@@ -23,8 +23,6 @@ class OrderController extends Controller
         $data = [
             'data' => $orders,
         ];
-        return dd($orders);
-
 
         return view('order.list', $data);
     }
