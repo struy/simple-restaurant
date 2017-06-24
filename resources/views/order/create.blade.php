@@ -27,6 +27,8 @@
                         </select>
                         <label for="quantity">Quantity:</label>
                         <input type="text" name="quantity">
+                        <label for="number_table">Number of table:</label>
+                        <input type="text" name="number_table">
 
                         <input type="submit">
                     </form>

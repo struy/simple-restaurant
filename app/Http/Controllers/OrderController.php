@@ -62,6 +62,7 @@ class OrderController extends Controller
         $order->dishes_id = $request->dishes_id;
         $order->users_id = Auth::id();
         $order->quantity = $request->quantity;
+        $order->number_table = $request->number_table;
         $order->save();
         $request->session()->flash('success', 'The order was successfully saved!');
         return back();
