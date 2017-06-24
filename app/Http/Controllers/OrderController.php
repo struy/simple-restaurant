@@ -18,11 +18,12 @@ class OrderController extends Controller
     {
         $request->user()->authorizeRoles(['waiters', 'admin']);
 
-        $orders = Order::all();
+        $orders = Order::with('user')->with('dishe')->get();
 
         $data = [
             'data' => $orders,
         ];
+        return dd($orders);
 
 
         return view('order.list', $data);
