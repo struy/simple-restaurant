@@ -16,7 +16,16 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['waiters']);
+        $request->user()->authorizeRoles(['waiters', 'admin']);
+
+        $orders = Order::all();
+
+        $data = [
+            'data' => $orders,
+        ];
+
+
+        return view('order.list', $data);
     }
 
     /**
