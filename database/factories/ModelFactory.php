@@ -42,5 +42,6 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'dishes_id' => rand(1, 50),
         'quantity' => rand(1,3),
         'number_table' => rand(1, 25),
+        'confirmed'=> $faker->boolean,
         ];
 });

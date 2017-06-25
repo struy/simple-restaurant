@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+
+
+
 @section('content')
     <div class="container ">
         {{ csrf_field() }}
@@ -11,6 +14,7 @@
                     <th class="text-center">Name of dishes</th>
                     <th class="text-center">Quantity</th>
                     <th class="text-center">Confirmed</th>
+                    <th class="text-center">Number of table</th>
                     <th class="text-center">Timer</th>
 
                 </tr>
@@ -21,14 +25,14 @@
                         <td>{{$order->dishe->name}}</td>
                         <td>{{$order->quantity}}</td>
                         <td>
-                            @if ($order->confirmed)
+                            @if ($order->Confirmed)
                                 <span style="color:green">YES</span>
                             @else
                                 <span style="color:blue">NO </span>
                             @endif
                         </td>
-                        <td>
-                            <div data-countdown="{{$order->time}}">{{$order->created_at}}</div>
+                        <td>{{$order->number_table}}</td>
+                        <td> <div data-countdown="{{$order->time}}">{{$order->created_at}}</div>
                         </td>
 
 

@@ -11,16 +11,16 @@
 <script>
     $(document).ready(function () {
         $('#table').DataTable({
-            rowCallback: function (nRow) {
+            rowCallback: function(nRow) {
                 /* This is your code */
-                $(nRow).find('[data-countdown]').each(function () {
+                $(nRow).find('[data-countdown]').each(function() {
                     var $this = $(this),
-                        nextDate = moment.tz($(this).data('countdown'), "UTC");
-                    finalDate = nextDate.toDate();
-                    $this.countdown(finalDate, function (event) {
+                        finalDate = $(this).data('countdown');
+
+                    $this.countdown(finalDate, function(event) {
                         $this.html(event.strftime('%H:%M:%S'));
                     });
-                }).on('finish.countdown', function (event) {
+                }).on('finish.countdown', function(event) {
                     $(this).addClass("label label-sm label-danger");
                     $(this).html('This order has expired!');
                 });
