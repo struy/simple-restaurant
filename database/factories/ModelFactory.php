@@ -28,7 +28,7 @@ $factory->define(App\Dishe::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->word,
-        'cooking_time' => rand(5, 240),
+        'cooking_time' => rand(5, 60),
 
     ];
 });

@@ -21,7 +21,7 @@ class Order extends Model
     {
         $dt = $this->created_at;
         $carbon = Carbon::instance($dt);
-        $cooking_time = ($this->dishe->cooking_time) * ($this->quantity);
+        $cooking_time = ($this->dishe->cooking_time) * (1+($this->quantity)*0.1);
         $carbon->addMinutes($cooking_time);;
 
 

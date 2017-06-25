@@ -14,11 +14,11 @@
                     var $this = $(this),
                         finalDate = $(this).data('countdown');
                     $this.countdown(finalDate, function(event) {
-                        $this.html(event.strftime('%D days %H:%M:%S'));
+                        $this.html(event.strftime('%H:%M:%S'));
                     });
                 }).on('finish.countdown', function(event) {
                     $(this).addClass("label label-sm label-danger");
-                    $(this).html('This offer has expired!');
+                    $(this).html('This order has expired!');
                 });
             }
         });
