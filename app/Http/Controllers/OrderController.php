@@ -16,6 +16,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+
         $request->user()->authorizeRoles(['waiters', 'admin']);
 
         $orders = Order::with('user')->with('dishe')->get();

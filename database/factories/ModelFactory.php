@@ -40,7 +40,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
     return [
         'users_id' => rand(1, 3),
         'dishes_id' => rand(1, 50),
-        'quantity' => rand(1, 20),
+        'quantity' => rand(1,3),
         'number_table' => rand(1, 25),
         ];
 });

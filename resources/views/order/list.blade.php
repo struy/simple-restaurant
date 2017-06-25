@@ -29,7 +29,7 @@
                             @endif
                         </td>
                         <td>{{$order->number_table}}</td>
-                        <td> <div data-countdown="{{$order->time}}"></div>
+                        <td> <div data-countdown="{{$order->time}}">{{$order->created_at}}</div>
                             </td>
 
 

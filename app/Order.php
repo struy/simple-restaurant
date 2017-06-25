@@ -20,7 +20,7 @@ class Order extends Model
     public function getTimeAttribute()
     {
         $dt = $this->created_at;
-        $carbon = Carbon::instance($dt);
+        $carbon = Carbon::createFromFormat('Y-m-d H:m:s', $dt,'UTC');
         if ($this->quantity == 1)  $cooking_time = ($this->dishe->cooking_time);
         else $cooking_time = ($this->dishe->cooking_time) * ($this->quantity)*0.1;
         $carbon->addMinutes($cooking_time);
