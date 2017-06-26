@@ -19,4 +19,14 @@ class CuisineController extends Controller
 
         return view('cuisine.list', $data);
     }
+
+
+    public function json()
+    {
+        $orders = Order::where('confirmed',0)->with('user')->with('dishe')->get();
+        return response()->json($orders, 201);
+
+    }
+
+
 }

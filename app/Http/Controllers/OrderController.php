@@ -35,6 +35,13 @@ class OrderController extends Controller
 
     }
 
+    public function json()
+    {
+        $orders = Order::with('user')->with('dishe')->get();
+        return response()->json($orders, 201);
+
+    }
+
 
     public function create(Request $request)
     {
