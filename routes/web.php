@@ -27,6 +27,7 @@ Route::resource('users', 'UserController');
 //Сторінка офіціанта з списком замовлень та їх статусами
 //Сторінка офіціанта з створенням нового замовлення
 Route::resource('orders', 'OrderController');
+Route::post('/orders/confirmed', 'OrderController@confirmed')->name('confirmed');
 
 //Сторінка кухні з усіма активними замовленнями (готуються/готові)
 Route::get('/cuisine', 'CuisineController@index')->name('cuisine');
