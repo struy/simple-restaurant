@@ -29,6 +29,7 @@ Route::resource('users', 'UserController');
 Route::resource('orders', 'OrderController');
 Route::post('/orders/confirmed', 'OrderController@confirmed')->name('confirmed');
 Route::post('/orders/json', 'OrderController@json');
+
 //Сторінка кухні з усіма активними замовленнями (готуються/готові)
 Route::get('/cuisine', 'CuisineController@index')->name('cuisine');
 Route::get('/cuisine/json', 'CuisineController@json');

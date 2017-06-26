@@ -27,7 +27,7 @@
             }
         })
 
-        $('button').click(function () {
+        $('button.confirmed').click(function () {
             var id = $(this).data('info');
             alert(id);
             $.ajaxSetup({
@@ -48,6 +48,30 @@
                 }
             });
         });
+
+
+        function func() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/cuisine/json',
+                data: { },
+                success: function (data) {
+                    $.each(data, function(i, item) {
+                        console.log(item.id);
+                    });
+                }
+            });
+        }
+
+        setTimeout(func, 20000);
+
 
 
     });
