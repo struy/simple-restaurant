@@ -11,6 +11,15 @@
 <script>
     $(document).ready(function () {
         $('#table').DataTable({
+
+//            ajax: '/cuisine/json',
+//            dataSrc: 'staff',
+//            columns: [
+//                { data: 'id' },
+//                { data: 'dishe.name' },
+//            ],
+
+
             rowCallback: function (nRow) {
                 /* This is your code */
                 $(nRow).find('[data-countdown]').each(function () {
@@ -50,30 +59,38 @@
         });
 
 
-        function func() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-
-            $.ajax({
-                type: 'POST',
-                url: '/cuisine/json',
-                data: { },
-                success: function (data) {
-                    $.each(data, function(i, item) {
-                        console.log(item.id);
-                    });
-                }
-            });
-        }
-
-        setTimeout(func, 20000);
-
-
-
     });
+
+    setInterval(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/cuisine/json',
+            success: function (data) {
+                console.log('cuisine');
+                $.each(data, function (i, item) {
+                    $('.item' + item.id).replaceWith("<tr class='item" + item.id + "'>" +
+                        "<td>" + item.id + "</td>" +
+                        "<td>" + item.dishe.name + "</td>" +
+                        "<td>" + item.quantity + "</td>" +
+                        "<td>" + item.number_table + "</td>" +
+                        "<td>" + item.user.name + "</td>" +
+                        "<td> <div data-countdown='" + item.time +
+                        "'>" + item.created_at + "</div>" +
+                        "</td><td> <div class='confirmed_order'>" +
+                        "<button type='button' class='confirmed btn btn-success'" +
+                        "data-info='" + item.id + "'>" +
+                        "Success</button> </div> </td> </tr>");
+                });
+            }
+        });
+    }, 3000);
+
+
 </script>
 

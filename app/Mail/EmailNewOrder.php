@@ -31,7 +31,7 @@ class EmailNewOrder extends Mailable
     {
         return $this->view('email.new_order')->with([
 
-            ‘order’ => $this->order,
+            'order' => $this->order,
 
         ]);
     }

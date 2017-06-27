@@ -32,7 +32,7 @@ class EmailConfirmedOrder extends Mailable
     {
         return $this->view('email.confirmed')->with([
 
-            ‘order’ => $this->order,
+            'order' => $this->order,
 
         ]);
     }
