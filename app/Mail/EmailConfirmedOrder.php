@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,15 +11,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class EmailConfirmedOrder extends Mailable
 {
     use Queueable, SerializesModels;
+    protected $order;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -28,6 +30,10 @@ class EmailConfirmedOrder extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('email.confirmed')->with([
+
+            ‘order’ => $this->order,
+
+        ]);
     }
 }

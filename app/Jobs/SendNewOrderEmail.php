@@ -3,7 +3,8 @@
 namespace App\Jobs;
 
 use Mail;
-use App\Mail\EmailConfirmedOrder;
+use App\Order;
+use App\Mail\EmailNewOrder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,15 +14,16 @@ use Illuminate\Foundation\Bus\Dispatchable;
 class SendNewOrderEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    protected  $order;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order =$order;
     }
 
     /**
@@ -31,6 +33,8 @@ class SendNewOrderEmail implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $email = new EmailNewOrder($this->order);
+
+        Mail::to('cook@example.com')->send($email);
     }
 }
