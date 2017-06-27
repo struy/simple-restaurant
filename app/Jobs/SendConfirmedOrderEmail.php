@@ -35,6 +35,6 @@ class SendConfirmedOrderEmail implements ShouldQueue
     {
         $email = new EmailConfirmedOrder($this->order);
 
-        Mail::to('cook@example.com')->send($email);
+        Mail::to('waiter@example.com')->send($email);
     }
 }
