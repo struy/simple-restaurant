@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendConfirmedOrderEmail;
+use App\Jobs\SendNewOrderEmail;
 use Illuminate\Support\Facades\Auth;
 use App\Dishe;
 use App\Order;
@@ -31,6 +33,7 @@ class OrderController extends Controller
     $order = Order::findOrFail($request->id);
     $order->confirmed = 1;
     $order->save();
+    dispatch(new SendConfirmedOrderEmail($order));
     return 'Status order\'s changed';
 
     }
@@ -70,6 +73,7 @@ class OrderController extends Controller
         $order->quantity = $request->quantity;
         $order->number_table = $request->number_table;
         $order->save();
+        dispatch(new SendNewOrderEmail($order));
         $request->session()->flash('success', 'The order was successfully saved!');
         return back();
     }
