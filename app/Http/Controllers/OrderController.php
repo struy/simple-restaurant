@@ -27,15 +27,15 @@ class OrderController extends Controller
     }
 
     public function confirmed(Request $request)
-    {$this->validate($request, [
-        'id' => 'required|min:1',
+    {
+        $this->validate($request, [
+            'id' => 'required|min:1',
         ]);
-    $order = Order::findOrFail($request->id);
-    $order->confirmed = 1;
-    $order->save();
-    dispatch(new SendConfirmedOrderEmail($order));
-    return 'Status order\'s changed';
-
+        $order = Order::findOrFail($request->id);
+        $order->confirmed = 1;
+        $order->save();
+        dispatch(new SendConfirmedOrderEmail($order));
+        return 'Status order\'s changed';
     }
 
     public function json()
